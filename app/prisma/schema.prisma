@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Tracks all quantum-encrypted payload states
+model QuantumState {
+  id               String   @id @default(uuid())
+  walletId         String
+  quantumKeyId     String   @unique
+  stateSignature   String
+  encryptedPayload String   @db.Text
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+// Heir email profiles — stores encrypted heir data off-chain
+model HeirProfile {
+  id               String   @id @default(uuid())
+  ownerWallet      String
+  heirWallet       String
+  heirEmail        String
+  encryptedMessage String   @db.Text
+  quantumKeyId     String
+  shareBps         Int
+  emailSent        Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@unique([ownerWallet, heirWallet])
+}
+
+// Full audit trail of all protocol actions
+model AuditLog {
+  id        String   @id @default(uuid())
+  action    String
+  walletId  String?
+  metadata  String?  @db.Text
+  status    String
+  createdAt DateTime @default(now())
+}

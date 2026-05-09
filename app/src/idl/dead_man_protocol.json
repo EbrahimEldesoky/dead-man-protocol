@@ -1,0 +1,1470 @@
+{
+  "address": "FscnjuLXzegHTn6LYdSS2HbjaaDDa7Tn2tBCgSp3dLSq",
+  "metadata": {
+    "name": "dead_man_protocol",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "add_beneficiary",
+      "discriminator": [
+        105,
+        214,
+        106,
+        141,
+        180,
+        166,
+        123,
+        238
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "beneficiary_record",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  101,
+                  110,
+                  101,
+                  102,
+                  105,
+                  99,
+                  105,
+                  97,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "arg",
+                "path": "beneficiary_wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "beneficiary_wallet",
+          "type": "pubkey"
+        },
+        {
+          "name": "share_bps",
+          "type": "u16"
+        },
+        {
+          "name": "encrypted_secret_cid",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "name": "claim_inheritance_sol",
+      "discriminator": [
+        12,
+        146,
+        249,
+        71,
+        0,
+        240,
+        101,
+        120
+      ],
+      "accounts": [
+        {
+          "name": "beneficiary_wallet",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault.owner",
+                "account": "VaultConfig"
+              }
+            ]
+          },
+          "relations": [
+            "beneficiary_record"
+          ]
+        },
+        {
+          "name": "beneficiary_record",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  101,
+                  110,
+                  101,
+                  102,
+                  105,
+                  99,
+                  105,
+                  97,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "beneficiary_wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "claim_inheritance_spl",
+      "discriminator": [
+        88,
+        107,
+        115,
+        5,
+        136,
+        78,
+        7,
+        80
+      ],
+      "accounts": [
+        {
+          "name": "beneficiary_wallet",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault.owner",
+                "account": "VaultConfig"
+              }
+            ]
+          },
+          "relations": [
+            "beneficiary_record"
+          ]
+        },
+        {
+          "name": "beneficiary_record",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  101,
+                  110,
+                  101,
+                  102,
+                  105,
+                  99,
+                  105,
+                  97,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "beneficiary_wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault_token_account",
+          "writable": true
+        },
+        {
+          "name": "beneficiary_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "deposit_sol",
+      "discriminator": [
+        108,
+        81,
+        78,
+        117,
+        125,
+        155,
+        56,
+        200
+      ],
+      "accounts": [
+        {
+          "name": "depositor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault.owner",
+                "account": "VaultConfig"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount_lamports",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "deposit_spl_token",
+      "discriminator": [
+        86,
+        172,
+        212,
+        121,
+        63,
+        233,
+        96,
+        144
+      ],
+      "accounts": [
+        {
+          "name": "depositor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault.owner",
+                "account": "VaultConfig"
+              }
+            ]
+          }
+        },
+        {
+          "name": "depositor_token_account",
+          "writable": true
+        },
+        {
+          "name": "vault_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "emergency_cancel",
+      "discriminator": [
+        92,
+        73,
+        255,
+        17,
+        197,
+        5,
+        46,
+        75
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "extend_deadline",
+      "discriminator": [
+        18,
+        209,
+        27,
+        175,
+        87,
+        13,
+        213,
+        188
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "new_deadline_seconds",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "heartbeat",
+      "discriminator": [
+        202,
+        104,
+        56,
+        6,
+        240,
+        170,
+        63,
+        134
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize_vault",
+      "discriminator": [
+        48,
+        191,
+        163,
+        44,
+        71,
+        129,
+        63,
+        164
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "deadline_seconds",
+          "type": "i64"
+        },
+        {
+          "name": "grace_period_seconds",
+          "type": "i64"
+        },
+        {
+          "name": "encrypted_will_cid",
+          "type": "bytes"
+        },
+        {
+          "name": "will_hash",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "deposit_amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "remove_beneficiary",
+      "discriminator": [
+        67,
+        27,
+        24,
+        153,
+        135,
+        64,
+        202,
+        77
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          },
+          "relations": [
+            "beneficiary_record"
+          ]
+        },
+        {
+          "name": "beneficiary_record",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  101,
+                  110,
+                  101,
+                  102,
+                  105,
+                  99,
+                  105,
+                  97,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault"
+              },
+              {
+                "kind": "account",
+                "path": "beneficiary_record.wallet",
+                "account": "BeneficiaryRecord"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "update_will",
+      "discriminator": [
+        192,
+        206,
+        217,
+        54,
+        165,
+        122,
+        8,
+        10
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "new_encrypted_will_cid",
+          "type": "bytes"
+        },
+        {
+          "name": "new_will_hash",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "BeneficiaryRecord",
+      "discriminator": [
+        68,
+        94,
+        47,
+        88,
+        88,
+        108,
+        16,
+        4
+      ]
+    },
+    {
+      "name": "VaultConfig",
+      "discriminator": [
+        99,
+        86,
+        43,
+        216,
+        184,
+        102,
+        119,
+        77
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "BeneficiaryAdded",
+      "discriminator": [
+        215,
+        140,
+        118,
+        77,
+        111,
+        73,
+        163,
+        233
+      ]
+    },
+    {
+      "name": "BeneficiaryRemoved",
+      "discriminator": [
+        91,
+        177,
+        35,
+        58,
+        199,
+        203,
+        65,
+        249
+      ]
+    },
+    {
+      "name": "DeadlineExtended",
+      "discriminator": [
+        100,
+        53,
+        50,
+        91,
+        205,
+        71,
+        0,
+        103
+      ]
+    },
+    {
+      "name": "Deposited",
+      "discriminator": [
+        111,
+        141,
+        26,
+        45,
+        161,
+        35,
+        100,
+        57
+      ]
+    },
+    {
+      "name": "HeartbeatRecorded",
+      "discriminator": [
+        171,
+        129,
+        156,
+        232,
+        208,
+        84,
+        30,
+        86
+      ]
+    },
+    {
+      "name": "InheritanceClaimed",
+      "discriminator": [
+        187,
+        111,
+        117,
+        77,
+        6,
+        154,
+        244,
+        192
+      ]
+    },
+    {
+      "name": "TokenDeposited",
+      "discriminator": [
+        104,
+        7,
+        18,
+        187,
+        94,
+        141,
+        251,
+        120
+      ]
+    },
+    {
+      "name": "TokenInheritanceClaimed",
+      "discriminator": [
+        202,
+        110,
+        66,
+        150,
+        96,
+        87,
+        209,
+        32
+      ]
+    },
+    {
+      "name": "VaultCancelled",
+      "discriminator": [
+        137,
+        72,
+        110,
+        157,
+        80,
+        107,
+        59,
+        181
+      ]
+    },
+    {
+      "name": "VaultInitialized",
+      "discriminator": [
+        180,
+        43,
+        207,
+        2,
+        18,
+        71,
+        3,
+        75
+      ]
+    },
+    {
+      "name": "WillUpdated",
+      "discriminator": [
+        2,
+        101,
+        252,
+        87,
+        199,
+        107,
+        162,
+        159
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "Unauthorized",
+      "msg": "Unauthorized: only the vault owner can perform this action"
+    },
+    {
+      "code": 6001,
+      "name": "DeadlineTooShort",
+      "msg": "Deadline must be at least 30 days (2,592,000 seconds)"
+    },
+    {
+      "code": 6002,
+      "name": "GracePeriodTooShort",
+      "msg": "Grace period must be at least 3 days (259,200 seconds)"
+    },
+    {
+      "code": 6003,
+      "name": "SharesExceedMaximum",
+      "msg": "Total shares would exceed 10000 basis points (100%)"
+    },
+    {
+      "code": 6004,
+      "name": "MaxBeneficiariesReached",
+      "msg": "Maximum number of beneficiaries (10) reached"
+    },
+    {
+      "code": 6005,
+      "name": "VaultAlreadyExecuted",
+      "msg": "Vault has already been executed"
+    },
+    {
+      "code": 6006,
+      "name": "VaultCancelled",
+      "msg": "Vault has been cancelled"
+    },
+    {
+      "code": 6007,
+      "name": "DeadlineNotPassed",
+      "msg": "Deadline has not passed yet — owner is still active"
+    },
+    {
+      "code": 6008,
+      "name": "GracePeriodNotEnded",
+      "msg": "Grace period has not ended yet"
+    },
+    {
+      "code": 6009,
+      "name": "DeadlineAlreadyPassed",
+      "msg": "Deadline has already passed — cannot perform this action"
+    },
+    {
+      "code": 6010,
+      "name": "AlreadyClaimed",
+      "msg": "Inheritance already claimed by this beneficiary"
+    },
+    {
+      "code": 6011,
+      "name": "ArithmeticOverflow",
+      "msg": "Arithmetic overflow in share calculation"
+    },
+    {
+      "code": 6012,
+      "name": "DeadlineCannotBeShortened",
+      "msg": "New deadline must be greater than current deadline"
+    },
+    {
+      "code": 6013,
+      "name": "ZeroShareBps",
+      "msg": "Share basis points must be greater than zero"
+    },
+    {
+      "code": 6014,
+      "name": "InsufficientBalance",
+      "msg": "Insufficient vault balance for transfer"
+    },
+    {
+      "code": 6015,
+      "name": "VaultNotActive",
+      "msg": "Vault is not active (executed or cancelled)"
+    }
+  ],
+  "types": [
+    {
+      "name": "BeneficiaryAdded",
+      "docs": [
+        "Emitted when a beneficiary is added to a vault."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "share_bps",
+            "type": "u16"
+          },
+          {
+            "name": "total_shares",
+            "type": "u16"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BeneficiaryRecord",
+      "docs": [
+        "On-chain account representing a single beneficiary of a vault.",
+        "",
+        "Derived as a PDA with seeds:",
+        "`[b\"beneficiary\", vault.key().as_ref(), wallet.key().as_ref()]`.",
+        "Each beneficiary has an allocated share (in bps) and an optional",
+        "encrypted secret payload on IPFS."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "docs": [
+              "The vault this beneficiary belongs to."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "wallet",
+            "docs": [
+              "The wallet address of the beneficiary."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "share_bps",
+            "docs": [
+              "Share of the vault in basis points (100% = 10000 bps)."
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "encrypted_secret_cid",
+            "docs": [
+              "IPFS CID of the per-heir encrypted secret payload."
+            ],
+            "type": "bytes"
+          },
+          {
+            "name": "is_claimed",
+            "docs": [
+              "Whether this beneficiary has claimed their inheritance."
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "claimed_at",
+            "docs": [
+              "Unix timestamp of when the claim was made (0 if unclaimed)."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump seed."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BeneficiaryRemoved",
+      "docs": [
+        "Emitted when a beneficiary is removed from a vault."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "recovered_shares",
+            "type": "u16"
+          },
+          {
+            "name": "total_shares",
+            "type": "u16"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DeadlineExtended",
+      "docs": [
+        "Emitted when the deadline is extended."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "old_deadline",
+            "type": "i64"
+          },
+          {
+            "name": "new_deadline",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Deposited",
+      "docs": [
+        "Emitted when SOL is deposited into the vault."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "depositor",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount_lamports",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "HeartbeatRecorded",
+      "docs": [
+        "Emitted when the owner sends a heartbeat (proof of life)."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "InheritanceClaimed",
+      "docs": [
+        "Emitted when a beneficiary claims their SOL inheritance."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "beneficiary",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "share_bps",
+            "type": "u16"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TokenDeposited",
+      "docs": [
+        "Emitted when SPL tokens are deposited into the vault."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "depositor",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TokenInheritanceClaimed",
+      "docs": [
+        "Emitted when a beneficiary claims their SPL token inheritance."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "beneficiary",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "share_bps",
+            "type": "u16"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VaultCancelled",
+      "docs": [
+        "Emitted when the vault is cancelled by the owner."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VaultConfig",
+      "docs": [
+        "On-chain account representing a single inheritance vault.",
+        "",
+        "Derived as a PDA with seeds: `[b\"vault\", owner.key().as_ref()]`.",
+        "Holds configuration for deadlines, grace periods, beneficiary tracking,",
+        "and encrypted will references."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "docs": [
+              "The wallet that created and owns this vault."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "last_heartbeat",
+            "docs": [
+              "Unix timestamp of the last heartbeat (proof of life) from the owner."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "deadline_seconds",
+            "docs": [
+              "Number of seconds of inactivity before the vault is considered triggered."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "encrypted_will_cid",
+            "docs": [
+              "IPFS CID of the encrypted will payload, stored as fixed-size bytes."
+            ],
+            "type": "bytes"
+          },
+          {
+            "name": "will_hash",
+            "docs": [
+              "SHA-256 hash of the will payload for integrity verification."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "total_shares",
+            "docs": [
+              "Sum of all beneficiary shares in basis points (max 10000)."
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "beneficiary_count",
+            "docs": [
+              "Number of beneficiaries currently registered."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "is_executed",
+            "docs": [
+              "Whether all beneficiaries have claimed and the vault is finalized."
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "is_cancelled",
+            "docs": [
+              "Whether the owner has cancelled this vault."
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "grace_period_seconds",
+            "docs": [
+              "Number of seconds after deadline before claims are allowed.",
+              "Immutable after vault creation."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump seed for signing."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VaultInitialized",
+      "docs": [
+        "Emitted when a new vault is initialized."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "deadline_seconds",
+            "type": "i64"
+          },
+          {
+            "name": "grace_period_seconds",
+            "type": "i64"
+          },
+          {
+            "name": "initial_deposit_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WillUpdated",
+      "docs": [
+        "Emitted when the encrypted will is updated."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "will_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    }
+  ]
+}
