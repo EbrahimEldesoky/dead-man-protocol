@@ -369,7 +369,7 @@ Layer 4: Will Privacy (Off-Chain)
 ### One-Command Launch
 
 ```bash
-git clone https://github.com/EbrahimEldesoky/dead-man-protocol
+git clone https://github.com/EbrahimEldesoky/dead-man-protocol.git
 cd dead-man-protocol
 chmod +x run.sh
 ./run.sh
